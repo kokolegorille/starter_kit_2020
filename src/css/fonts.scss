@@ -1,0 +1,12 @@
+/* FONTS */
+@font-face {
+  font-family: roboto;
+  src: url("../fonts/roboto.ttf") format("truetype"); /* For IE */
+  src: local("roboto"), url("../fonts/roboto.ttf") format("truetype"); /* For non-IE */
+}
+
+$font_family_sans_serif: "roboto", Verdana, Arial, sans-serif;
+
+body {
+  font-family: $font_family_sans_serif;
+}
