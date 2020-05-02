@@ -75,3 +75,7 @@ OPTIONS:  { _: [],
   '$0':
    '/Users/sqrt/DATA_2020/code/_REACT/starter_kit/node_modules/.bin/webpack-dev-server' }
 ```
+
+## Add hookrouter
+
+Use it with lazy loading multiple pages.
