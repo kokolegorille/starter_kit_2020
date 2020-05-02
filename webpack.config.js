@@ -1,4 +1,5 @@
 const path = require("path");
+const glob = require("glob");
 const Webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -9,12 +10,28 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 // For dev server
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const VENDOR_LIBS = [
+  "react", "react-dom"
+];
+
 module.exports = (env, options) => {
   const devMode = options.mode !== "production";
 
   return {
     devtool: devMode ? "source-map" : undefined,
     optimization: {
+      // This reduce bundle size!
+      // https://github.com/webpack/webpack/issues/6357
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            test: /react|react-dom/,
+            chunks: 'initial',
+            name: 'vendor',
+            enforce: true
+          }
+        }
+      },
       minimizer: [
         new TerserPlugin({ cache: true, parallel: true, sourceMap: devMode }),
         new OptimizeCSSAssetsPlugin({}),
@@ -23,6 +40,7 @@ module.exports = (env, options) => {
     mode: devMode,
     entry: {
       bundle: "./src/index.js",
+      vendor: VENDOR_LIBS.concat(glob.sync("./vendor/**/*.js")),
     },
     output: {
       filename: "js/[name].js",
