@@ -212,4 +212,11 @@ Form.propTypes = {
   showLabel: PropTypes.bool,
 };
 
+Form.defaultProps = {
+  initialState: {},
+  handleCancel: null,
+  resetOnSubmit: false,
+  showLabel: false,
+};
+
 export default Form;

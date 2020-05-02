@@ -11,18 +11,18 @@ const Home = () => {
     <>
       <h1>Home</h1>
       <h2>Sample Form</h2>
-      <Form 
-        schema={signinSchema} 
-        callback={params => console.log(params)} 
-        handleCancel={() => console.log("Cancel")} 
+      <Form
+        schema={signinSchema}
+        callback={(params) => console.log(params)}
+        handleCancel={() => console.log('Cancel')}
         resetOnSubmit={true} />
       <h2>Sample Menu Icon</h2>
-      <MenuIcon callback={() => console.log("Clicked!")} />
+      <MenuIcon callback={() => console.log('Clicked!')} />
       <h2>Sample Joystick</h2>
-      <Joystick 
+      <Joystick
         callback={
           ({forward, turn}) => console.log(`Moved: ${forward} ${turn}`)
-        } 
+        }
       />
     </>
   );
