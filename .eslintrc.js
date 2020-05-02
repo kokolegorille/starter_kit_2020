@@ -26,6 +26,8 @@ module.exports = {
   "rules": {
     // Turn off rule to fix: Component definition is missing display name  react/display-name
     "react/display-name": "off",
+    // Turn off rule with functional React
+    // "react/prop-types": "off",
   },
   // https://github.com/yannickcr/eslint-plugin-react#configuration
   "settings": {
