@@ -1,15 +1,15 @@
-import React, { lazy, Suspense } from "react";
-import { useRoutes, A } from "hookrouter";
+import React, {lazy, Suspense} from 'react';
+import {useRoutes, A} from 'hookrouter';
 
 // Lazy Views
-const Home = lazy(() => import("./views/home"));
-const About = lazy(() => import("./views/about"));
-const NotFound = lazy(() => import("./views/not_found"));
+const Home = lazy(() => import('./views/home'));
+const About = lazy(() => import('./views/about'));
+const NotFound = lazy(() => import('./views/not_found'));
 
 // Hookrouter
 const routes = () => ({
-  "/": () => <Home />,
-  "/about": () => <About />,
+  '/': () => <Home />,
+  '/about': () => <About />,
 });
 
 const App = () => {
@@ -25,7 +25,7 @@ const App = () => {
         { content }
       </Suspense>
     </div>
-  )
-}
+  );
+};
 
 export default App;
