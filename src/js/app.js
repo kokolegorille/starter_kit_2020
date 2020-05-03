@@ -10,8 +10,8 @@ const NotFound = lazy(() => import('./views/not_found'));
 // Hookrouter
 const routes = () => ({
   '/': () => <Home />,
-  '/about': () => <About />,
-  '/fonts': () => <Fonts />,
+  '/about/': () => <About />,
+  '/fonts/': () => <Fonts />,
 });
 
 const App = () => {
@@ -21,8 +21,8 @@ const App = () => {
     <div>
       <ul>
         <li><A href="/">Home</A></li>
-        <li><A href="/about">About</A></li>
-        <li><A href="/fonts">Fonts</A></li>
+        <li><A href="/about/">About</A></li>
+        <li><A href="/fonts/">Fonts</A></li>
       </ul>
       <Suspense fallback={<div>Loading...</div>}>
         { content }
