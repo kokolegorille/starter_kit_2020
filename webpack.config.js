@@ -91,7 +91,13 @@ module.exports = (env, options) => {
       new MiniCssExtractPlugin({ filename: "./css/app.css" }),
       new Webpack.HotModuleReplacementPlugin(),
       new ManifestPlugin(),
-      new CopyWebpackPlugin([{ from: "./static", to: "./dist" }]),
+      // Obsolete 5.1.1 syntax
+      // new CopyWebpackPlugin([{ from: "static/", to: "./" }]),
+      // New 6.0.1 syntax
+      // https://webpack.js.org/plugins/copy-webpack-plugin/
+      new CopyWebpackPlugin({
+        patterns: [{ from: "./static", to: "./dist" }]
+      }),
     ],
     devServer: {
       contentBase: "./dist",

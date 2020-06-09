@@ -9,6 +9,6 @@ import App from './js/app';
 
 const app = document.getElementById('app');
 render(
-    <App />,
-    app,
+  <App />,
+  app,
 );

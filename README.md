@@ -79,3 +79,20 @@ OPTIONS:  { _: [],
 ## Add hookrouter
 
 Use it with lazy loading multiple pages.
+
+## Update for copy webpack plugin
+
+Update webpack.config.js
+
+      // Obsolete 5.1.1 syntax
+      // new CopyWebpackPlugin([{ from: "static/", to: "./" }]),
+      // New 6.0.1 syntax
+      // https://webpack.js.org/plugins/copy-webpack-plugin/
+      new CopyWebpackPlugin({
+        patterns: [{ from: "./static", to: "./dist" }]
+      }),
+
+// https://github.com/dvallin/agora/issues/1
+It seems to make it work, You need to add this file
+
+$ touch static/.gitkeep
