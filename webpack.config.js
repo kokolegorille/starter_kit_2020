@@ -7,6 +7,11 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
+// PWA with workbox
+// Uncomment if needed!
+
+// const WorkboxPlugin = require("workbox-webpack-plugin");
+
 // For dev server
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -45,7 +50,7 @@ module.exports = (env, options) => {
     output: {
       filename: "js/[name].js",
       path: path.resolve(__dirname, "./dist"),
-      publicPath: "",
+      publicPath: "/",
     },
     module: {
       rules: [
@@ -69,16 +74,30 @@ module.exports = (env, options) => {
         // Load images
         {
           test: /\.(png|svg|jpe?g|gif)(\?.*$|$)/,
-          loader: "url-loader?limit=10000",
+          use: [
+            {
+              loader: "file-loader",
+              options: {
+                name: "[name].[ext]",
+                // Relative to output public_path
+                outputPath: "./images/"
+              }
+            }
+          ]
         },
         // Load fonts
         {
-          test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?(\?.*$|$)/,
-          use: "url-loader?&name=/fonts/[name].[ext]",
-        },
-        {
-          test: /\.(eot|ttf|otf)?(\?.*$|$)/,
-          loader: "file-loader?&name=/fonts/[name].[ext]",
+          test: /\.(woff|woff2|eot|ttf|otf)$/,
+          use: [
+            {
+              loader: "file-loader",
+              options: {
+                name: "[name].[ext]",
+                // Relative to output public_path
+                outputPath: "./fonts/"
+              }
+            }
+          ]
         },
       ]
     },
@@ -98,14 +117,20 @@ module.exports = (env, options) => {
       new CopyWebpackPlugin({
         patterns: [{ from: "./static", to: "./dist" }]
       }),
+      // new WorkboxPlugin.GenerateSW({
+      //   // swDest: 'service-worker.js',
+      //   clientsClaim: true,
+      //   skipWaiting: true,
+      // }),
     ],
     devServer: {
-      contentBase: "./dist",
+      contentBase: path.join(__dirname, "dist"),
       historyApiFallback: true,
       compress: true,
       open: true,
       hot: true,
       overlay: true,
+      // port: 8080,
     }
   }
 };
