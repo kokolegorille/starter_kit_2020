@@ -115,7 +115,7 @@ module.exports = (env, options) => {
       // New 6.0.1 syntax
       // https://webpack.js.org/plugins/copy-webpack-plugin/
       new CopyWebpackPlugin({
-        patterns: [{ from: "./static", to: "./dist" }]
+        patterns: [{ from: "./static", to: "./" }]
       }),
       // new WorkboxPlugin.GenerateSW({
       //   // swDest: 'service-worker.js',
