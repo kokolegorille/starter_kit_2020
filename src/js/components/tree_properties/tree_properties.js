@@ -1,20 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 // Display an object as tree list
 
 const TreeProperties = ({object, recursive = true, exclude = []}) => {
   if (!object) return null;
-  if (typeof object === 'string') return <p>{object}</p>;
+  if (typeof object === "string") return <p>{object}</p>;
   
   let collector = [];
   
   // format property by typeof
   const formatValue = value => {
     switch (typeof value) {
-      case 'boolean':
-        return value ? 'true' : 'false';
-      case 'object':
+      case "boolean":
+        return value ? "true" : "false";
+      case "object":
         return (recursive && value !== null) ?
           <TreeProperties object={value} /> :
           JSON.stringify(value);

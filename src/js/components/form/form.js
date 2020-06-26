@@ -1,7 +1,7 @@
-import React, {useState, useRef} from 'react';
-import PropTypes from 'prop-types';
+import React, {useState, useRef} from "react";
+import PropTypes from "prop-types";
 
-import validation from './validation';
+import validation from "./validation";
 
 const Form = ({
   callback,
@@ -42,7 +42,7 @@ const Form = ({
   const handleChange = (e, name) => {
     e.persist();
     setState((previousState) => {
-      const value = e.target.value ? e.target.value : '';
+      const value = e.target.value ? e.target.value : "";
 
       return {
         ...previousState,
@@ -66,17 +66,17 @@ const Form = ({
       elementConfig,
     } = schema[name];
 
-    const inputClasses = ['form-control'];
+    const inputClasses = ["form-control"];
 
     const {valid, touched, value} = state[name];
 
     // Set bootstrap form style
-    if (!valid && touched) inputClasses.push('error is-invalid');
-    if (valid && touched) inputClasses.push('is-valid');
+    if (!valid && touched) inputClasses.push("error is-invalid");
+    if (valid && touched) inputClasses.push("is-valid");
 
     let element;
-    const stateValue = value || '';
-    const className = inputClasses.join(' ');
+    const stateValue = value || "";
+    const className = inputClasses.join(" ");
 
     let calculatedProps = {
       className,
@@ -86,7 +86,7 @@ const Form = ({
     if (first) calculatedProps = {...calculatedProps, ref: firstRef};
 
     switch (elementType) {
-      case 'select':
+      case "select":
         const {options, ...selectProps} = elementConfig;
         element = (
           <select
@@ -108,7 +108,7 @@ const Form = ({
           </select>
         );
         break;
-      case 'textarea':
+      case "textarea":
         element = (
           <textarea
             name={name}
@@ -120,10 +120,10 @@ const Form = ({
         break;
 
         // TODO:
-        // case 'checkbox':
-        // case 'radiobox':
+        // case "checkbox":
+        // case "radiobox":
 
-      case 'input':
+      case "input":
       default:
         element = (
           <input
@@ -135,7 +135,7 @@ const Form = ({
         );
     }
     return (
-      <div key={name} className='form-group'>
+      <div key={name} className="form-group">
         {
           showLabel &&
           <label htmlFor={name}>{name}</label>
@@ -187,14 +187,14 @@ const Form = ({
       <button
         disabled={!validateForm()}
         onClick={handleSubmitClick}
-        className='btn btn-primary' >
+        className="btn btn-primary" >
         Submit
       </button>
       {
         handleCancel &&
         <button
           onClick={handleCancelClick}
-          className='btn btn-secondary' >
+          className="btn btn-secondary" >
           Cancel
         </button>
       }

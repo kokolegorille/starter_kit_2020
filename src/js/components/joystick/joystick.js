@@ -1,26 +1,26 @@
-import React, {useState, useRef} from 'react';
-import PropTypes from 'prop-types';
+import React, {useState, useRef} from "react";
+import PropTypes from "prop-types";
 
 const joystickStyle = {
-  position: 'relative',
-  bottom: '35px',
-  width: '80px',
-  height: '80px',
-  background: 'rgba(126, 126, 126, 0.5)',
+  position: "relative",
+  bottom: "35px",
+  width: "80px",
+  height: "80px",
+  background: "rgba(126, 126, 126, 0.5)",
   // Do not set a border as it changes central points
-  // border:'#444 solid medium',
-  borderRadius: '50%',
-  left: '50%',
-  top: '0px',
-  transform: 'translateX(-50%)',
+  // border:"#444 solid medium",
+  borderRadius: "50%",
+  left: "50%",
+  top: "0px",
+  transform: "translateX(-50%)",
 };
 
 const padStyle = {
-  position: 'relative',
-  width: '40px',
-  height: '40px',
-  borderRadius: '50%',
-  background: '#fff',
+  position: "relative",
+  width: "40px",
+  height: "40px",
+  borderRadius: "50%",
+  background: "#fff",
 };
 
 const initialPosition = {top: 20, left: 20};
@@ -57,23 +57,23 @@ const Joystick = ({callback}) => {
 
   // Start listening
   const captureMouseEvent = () => {
-    if ('ontouchstart' in window) {
-      document.addEventListener('ontouchend', mouseupListener, true);
-      document.addEventListener('ontouchmove', mousemoveListener, true);
+    if ("ontouchstart" in window) {
+      document.addEventListener("ontouchend", mouseupListener, true);
+      document.addEventListener("ontouchmove", mousemoveListener, true);
     } else {
-      document.addEventListener('mouseup', mouseupListener, true);
-      document.addEventListener('mousemove', mousemoveListener, true);
+      document.addEventListener("mouseup", mouseupListener, true);
+      document.addEventListener("mousemove", mousemoveListener, true);
     }
   };
 
   // Clean up event listener after mouse up
   const mouseupListener = () => {
-    if ('ontouchstart' in window) {
-      document.removeEventListener('ontouchend', mouseupListener, true);
-      document.removeEventListener('ontouchmove', mousemoveListener, true);
+    if ("ontouchstart" in window) {
+      document.removeEventListener("ontouchend", mouseupListener, true);
+      document.removeEventListener("ontouchmove", mousemoveListener, true);
     } else {
-      document.removeEventListener('mouseup', mouseupListener, true);
-      document.removeEventListener('mousemove', mousemoveListener, true);
+      document.removeEventListener("mouseup", mouseupListener, true);
+      document.removeEventListener("mousemove", mousemoveListener, true);
     };
     setPosition(initialPosition);
   };
@@ -107,7 +107,7 @@ const Joystick = ({callback}) => {
     const turn = (left - initialPosition.left + padWidth / 2) / maxRadius;
 
     if (callback) callback({forward, turn});
-    else console.log('Please define a callback handler for joystick');
+    else console.log("Please define a callback handler for joystick");
 
     setPosition({
       top: top + padHeight / 2,

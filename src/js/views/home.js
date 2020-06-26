@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import signinSchema from '../schemas/signin_schema';
+import signinSchema from "../schemas/signin_schema";
 
-import Form from '../components/form';
-import MenuIcon from '../components/menu_icon';
-import Joystick from '../components/joystick';
-import TreeProperties from '../components/tree_properties';
+import Form from "../components/form";
+import MenuIcon from "../components/menu_icon";
+import Joystick from "../components/joystick";
+import TreeProperties from "../components/tree_properties";
 
 const Home = () => {
   return (
@@ -15,10 +15,10 @@ const Home = () => {
       <Form
         schema={signinSchema}
         callback={(params) => console.log(params)}
-        handleCancel={() => console.log('Cancel')}
+        handleCancel={() => console.log("Cancel")}
         resetOnSubmit={true} />
       <h2>Sample Menu Icon</h2>
-      <MenuIcon callback={() => console.log('Clicked!')} />
+      <MenuIcon callback={() => console.log("Clicked!")} />
       <h2>Sample Joystick</h2>
       <Joystick
         callback={

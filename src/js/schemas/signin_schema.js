@@ -1,9 +1,9 @@
 const signinSchema = {
   name: {
-    elementType: 'input',
+    elementType: "input",
     elementConfig: {
-      type: 'text',
-      placeholder: 'Name',
+      type: "text",
+      placeholder: "Name",
     },
     value: null,
     valid: false,
@@ -13,10 +13,10 @@ const signinSchema = {
     touched: false,
   },
   password: {
-    elementType: 'input',
+    elementType: "input",
     elementConfig: {
-      type: 'password',
-      placeholder: 'Password',
+      type: "password",
+      placeholder: "Password",
     },
     value: null,
     valid: false,

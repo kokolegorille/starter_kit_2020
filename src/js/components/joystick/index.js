@@ -1,1 +1,1 @@
-export {default} from './joystick';
+export {default} from "./joystick";
