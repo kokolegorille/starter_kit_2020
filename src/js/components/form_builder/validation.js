@@ -7,32 +7,34 @@ const emailValidator = (val) => emailRegex.test(val);
 const minLengthValidator = (val, minLength) => val.length >= minLength;
 const maxLengthValidator = (val, maxLength) => val.length <= maxLength;
 const isLengthValidator = (val, valLength) => val.length === valLength;
-const notEmptyValidator = (val) => val.trim() !== "";
+const notEmptyValidator = (val) => val.trim() !== '';
 
 /* eslint-disable no-restricted-syntax */
 const validation = (val, rules) => {
+  if (!rules) { return true }
+  
   let isValid = true;
   // error The body of a for-in should be wrapped in an if statement
   // to filter unwanted properties from the prototype
   for (const rule in rules) {
     if ({}.hasOwnProperty.call(rules, rule)) {
       switch (rule) {
-        case "isPhoneNumber":
+        case 'isPhoneNumber':
           isValid = isValid && phoneNumberValidator(val);
           break;
-        case "isEmail":
+        case 'isEmail':
           isValid = isValid && emailValidator(val);
           break;
-        case "minLength":
+        case 'minLength':
           isValid = isValid && minLengthValidator(val, rules[rule]);
           break;
-        case "maxLength":
+        case 'maxLength':
           isValid = isValid && maxLengthValidator(val, rules[rule]);
           break;
-        case "isLength":
+        case 'isLength':
           isValid = isValid && isLengthValidator(val, rules[rule]);
           break;
-        case "notEmpty":
+        case 'notEmpty':
           isValid = isValid && notEmptyValidator(val);
           break;
         default:
