@@ -2,9 +2,8 @@ const path = require("path");
 const glob = require("glob");
 const Webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const ManifestPlugin = require("webpack-manifest-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 // PWA with workbox
@@ -19,11 +18,11 @@ const VENDOR_LIBS = [
   "react", "react-dom"
 ];
 
-module.exports = (env, options) => {
+module.exports = (_env, options) => {
   const devMode = options.mode !== "production";
 
   return {
-    devtool: devMode ? "source-map" : undefined,
+    devtool: devMode ? 'eval-cheap-module-source-map' : undefined,
     optimization: {
       // This reduce bundle size!
       // https://github.com/webpack/webpack/issues/6357
@@ -38,14 +37,14 @@ module.exports = (env, options) => {
         }
       },
       minimizer: [
-        new TerserPlugin({ cache: true, parallel: true, sourceMap: devMode }),
-        new OptimizeCSSAssetsPlugin({}),
+        new TerserPlugin({}),
+        new CssMinimizerPlugin({})
       ]
     },
     mode: devMode,
     entry: {
       bundle: "./src/index.js",
-      vendor: VENDOR_LIBS.concat(glob.sync("./vendor/**/*.js")),
+      vendor_libs: VENDOR_LIBS.concat(glob.sync("./vendor/**/*.js")),
     },
     output: {
       filename: "js/[name].js",
@@ -109,19 +108,9 @@ module.exports = (env, options) => {
       }),
       new MiniCssExtractPlugin({ filename: "./css/app.css" }),
       new Webpack.HotModuleReplacementPlugin(),
-      new ManifestPlugin(),
-      // Obsolete 5.1.1 syntax
-      // new CopyWebpackPlugin([{ from: "static/", to: "./" }]),
-      // New 6.0.1 syntax
-      // https://webpack.js.org/plugins/copy-webpack-plugin/
       new CopyWebpackPlugin({
         patterns: [{ from: "./static", to: "./" }]
       }),
-      // new WorkboxPlugin.GenerateSW({
-      //   // swDest: 'service-worker.js',
-      //   clientsClaim: true,
-      //   skipWaiting: true,
-      // }),
     ],
     devServer: {
       contentBase: path.join(__dirname, "dist"),
